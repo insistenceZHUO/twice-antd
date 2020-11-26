@@ -1,7 +1,7 @@
 import { Button, Checkbox, Modal, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 
-import { ILoadButton } from './type.t';
+import { ILoadButton } from './type.t.ts';
 
 /* 
 
@@ -41,32 +41,55 @@ import { ILoadButton } from './type.t';
     }
 */
 
-
-const LoadBuatton: React.FC<ILoadButton> = (props) => {
-  const { onClick, loadingText, successText, loading, showMsg, title, showModal,  } = props;
+const LoadBuatton: React.FC<ILoadButton> = props => {
+  const {
+    onClick,
+    loadingText,
+    successText,
+    loading,
+    showMsg,
+    title,
+    showModal,
+    timer,
+  } = props;
 
   const [laloading, setLaloading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(false);
-
+  const [count, setCount] = useState(undefined);
   const handleClick = () => {
-    let hide:any = null;
-    if (showModal) {
-      setVisible(true);
-    } else {
-      if (typeof loading === 'undefined' || loading === true) setLaloading(true);
+    let hide: any = null;
+    if (!timer) {
+      if (showModal) {
+        setVisible(true);
+      } else {
+        if (typeof loading === 'undefined' || loading === true)
+          setLaloading(true);
 
-      if (typeof showMsg === 'undefined' || showMsg === true)
-        hide = message.loading(loadingText || '修改中...', 0);
+        if (typeof showMsg === 'undefined' || showMsg === true)
+          hide = message.loading(loadingText || '修改中...', 0);
+      }
+    } else {
+      setLaloading(true);
     }
 
     onClick((success: any) => {
+      if (timer) {
+        timerHandle();
+        setLaloading(false);
+        return;
+      }
       setTimeout(hide, 0);
-      if (typeof loading === 'undefined' || loading === true) setLaloading(false);
+      if (typeof loading === 'undefined' || loading === true)
+        setLaloading(false);
 
       if (success) {
         if (typeof showMsg === 'undefined' || showMsg === true)
-          message.success({ content: successText || '修改成功', key: 1, duration: 1 });
+          message.success({
+            content: successText || '修改成功',
+            key: 1,
+            duration: 1,
+          });
       } else {
         setTimeout(hide, 0);
       }
@@ -93,17 +116,45 @@ const LoadBuatton: React.FC<ILoadButton> = (props) => {
         onOk={() => handleOk()}
         okButtonProps={{ disabled: !disabled }}
       >
-        <Checkbox defaultChecked={disabled} onChange={e => setDisabled(e.target.checked)}>
+        <Checkbox
+          defaultChecked={disabled}
+          onChange={e => setDisabled(e.target.checked)}
+        >
           勾选后确定删除
         </Checkbox>
       </Modal>
     );
   };
 
+  // 如果为发送短信按钮
+  const timerHandle = () => {
+    setDisabled(true);
+    let tmr = null;
+    let data = 20;
+    tmr = setInterval(() => {
+      data = data - 1;
+      if (data !== -1) {
+        setCount(data);
+      } else {
+        clearInterval(tmr);
+        setDisabled(false);
+      }
+    }, 1000);
+  };
+
   return (
     <React.Fragment>
-      <Button {...props} loading={laloading} onClick={() => handleClick()}>
-        {laloading ? '提交中...' : props.children}
+      <Button
+        {...props}
+        loading={laloading}
+        disabled={disabled}
+        onClick={() => handleClick()}
+      >
+        {timer ? (
+          <span>{count ? count : props.children}</span>
+        ) : (
+          <span>{laloading ? '提交中...' : props.children}</span>
+        )}
       </Button>
       {renderModal()}
     </React.Fragment>
