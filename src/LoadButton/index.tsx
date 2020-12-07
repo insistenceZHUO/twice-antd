@@ -41,6 +41,7 @@ import { ILoadButton } from './type.t.ts';
     }
 */
 
+// 继续学习ts并且完善文档
 const LoadBuatton: React.FC<ILoadButton> = props => {
   const {
     onClick,
@@ -51,7 +52,7 @@ const LoadBuatton: React.FC<ILoadButton> = props => {
     title,
     showModal,
     timer,
-  } = props;
+  }: ILoadButton = props;
 
   const [laloading, setLaloading] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -67,7 +68,7 @@ const LoadBuatton: React.FC<ILoadButton> = props => {
           setLaloading(true);
 
         if (typeof showMsg === 'undefined' || showMsg === true)
-          hide = message.loading(loadingText || '修改中...', 0);
+          hide = message.loading(loadingText, 0);
       }
     } else {
       setLaloading(true);

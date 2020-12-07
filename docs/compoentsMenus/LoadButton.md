@@ -3,7 +3,7 @@ title: LoadButton
 toc: menu
 ---
 
-#####封装的全局 loading button 组件。
+## 封装的全局 loading button 组件。
 
 - 防止按钮的重复提交
 - 对于提交后的请求做统一的反馈
@@ -74,7 +74,6 @@ import React, { useState } from 'react';
 import { LoadButton } from 'demo';
 
 export default () => {
-  const [type, setType] = useState(true);
   const handleSuccessClick = done => {
     console.log(6666);
     setTimeout(() => {
@@ -85,7 +84,7 @@ export default () => {
   return (
     <LoadButton
       type="primary"
-      timer={type}
+      timer={false}
       onClick={done => handleSuccessClick(done)}
     >
       发送短信
@@ -96,9 +95,11 @@ export default () => {
 
 ## 参数
 
-| 参数        | 说明                               | 类型   | 默认值     |
-| ----------- | ---------------------------------- | ------ | ---------- |
-| loadingText | 提交中的 loading message 提示文字. | String | looding... |
-| successText | 提交成功后的 message 提示文字      | String | success... |
-| showMsg     | 点击时，是否展示 msg;              | String | success... |
-| onClick     | 点击事件的回掉函数                 | String | success... |
+| 参数        | 说明                               | 类型     | 默认值    |
+| ----------- | ---------------------------------- | -------- | --------- |
+| loadingText | 提交中的 loading message 提示文字. | String   | 修改中... |
+| successText | 提交成功后的 message 提示文字      | String   | 提交成功  |
+| showMsg     | 点击时，是否展示弹出层;            | Boolean  | false     |
+| onClick     | 点击事件的回掉函数                 | Function | - -       |
+| title       | 弹出层标题默认显示的文字           | Boolean  | false     |
+| showModal   | 弹出层标题默认显示的文字           | Boolean  | false     |
