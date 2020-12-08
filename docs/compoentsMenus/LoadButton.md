@@ -8,7 +8,7 @@ toc: menu
 - 防止按钮的重复提交
 - 对于提交后的请求做统一的反馈
 
-## 基础示例
+### 基础示例
 
 ```tsx
 import React from 'react';
@@ -31,7 +31,7 @@ export default () => {
 };
 ```
 
-## message 提示
+### message 提示
 
 如果需要在 loading 状态结束后，对处理的结果做出提示，可以给 dome()传递一个参数，参数类型为 boolean 值
 
@@ -67,7 +67,7 @@ export default () => {
 };
 ```
 
-## 短信倒计时按钮
+### 短信倒计时按钮
 
 ```tsx
 import React, { useState } from 'react';
@@ -84,7 +84,7 @@ export default () => {
   return (
     <LoadButton
       type="primary"
-      timer={false}
+      timer={true}
       onClick={done => handleSuccessClick(done)}
     >
       发送短信
@@ -93,7 +93,7 @@ export default () => {
 };
 ```
 
-## 参数
+### 参数
 
 | 参数        | 说明                               | 类型     | 默认值    |
 | ----------- | ---------------------------------- | -------- | --------- |
