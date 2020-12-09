@@ -6,6 +6,13 @@ import { I_LModla } from './type.t';
 const LModal: React.FC<I_LModla> = props => {
   const { text } = props;
   const [disabled, setDisabled] = useState(false);
+  useEffect(() => {
+    setDisabled(false);
+    console.log(6666);
+    return () => {
+      setDisabled(false);
+    };
+  }, []);
 
   return (
     <Modal
@@ -17,12 +24,7 @@ const LModal: React.FC<I_LModla> = props => {
       ]}
       {...props}
     >
-      <Checkbox
-        defaultChecked={disabled}
-        onChange={e => setDisabled(e.target.checked)}
-      >
-        {text}
-      </Checkbox>
+      <Checkbox onChange={e => setDisabled(e.target.checked)}>{text}</Checkbox>
     </Modal>
   );
 };

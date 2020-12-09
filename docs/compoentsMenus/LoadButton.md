@@ -1,6 +1,6 @@
 ---
 title: LoadButton
-toc: menu
+toc: content
 ---
 
 ## 封装的全局 loading button 组件。
