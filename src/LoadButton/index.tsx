@@ -146,10 +146,10 @@ const LoadBuatton: React.FC<ILoadButton> = props => {
   return (
     <React.Fragment>
       <Button
+        {...props}
         loading={laloading}
         disabled={disabled}
         onClick={() => handleClick()}
-        {...props}
       >
         {timer ? (
           <span>{count ? count : props.children}</span>
