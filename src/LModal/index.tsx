@@ -8,7 +8,6 @@ const LModal: React.FC<I_LModla> = props => {
   const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     setDisabled(false);
-    console.log(6666);
     return () => {
       setDisabled(false);
     };

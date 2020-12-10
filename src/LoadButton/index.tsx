@@ -1,7 +1,7 @@
 import { Button, Checkbox, Modal, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 
-import { ILoadButton } from './type.t.ts';
+import { ILoadButton } from './type.t';
 
 /* 
 
@@ -41,7 +41,6 @@ import { ILoadButton } from './type.t.ts';
     }
 */
 
-// 继续学习ts并且完善文档
 const LoadBuatton: React.FC<ILoadButton> = props => {
   const {
     onClick,
@@ -52,13 +51,14 @@ const LoadBuatton: React.FC<ILoadButton> = props => {
     title,
     showModal,
     timer,
-  }: ILoadButton = props;
+  } = props;
 
   const [laloading, setLaloading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [count, setCount] = useState(undefined);
   const handleClick = () => {
+    debugger;
     let hide: any = null;
     if (!timer) {
       if (showModal) {
