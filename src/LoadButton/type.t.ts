@@ -7,4 +7,5 @@ export interface ILoadButton {
   showModal: boolean,
   onClick: () => void,
   handleOk: () => void,
+  timer: boolean
 }
