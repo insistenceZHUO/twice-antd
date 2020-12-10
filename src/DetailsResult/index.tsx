@@ -19,8 +19,6 @@ class DetailsResult extends Component<
 
   componentDidMount() {
     const { visible, id, getDetailsAjax, onchange } = this.props;
-    console.log('id: ', id);
-
     if (visible && id) {
       this.setState({
         loading: true,
@@ -35,6 +33,7 @@ class DetailsResult extends Component<
               status: true,
             });
           }
+
           this.setState({
             loading: false,
           });

@@ -44,37 +44,32 @@ import { ILoadButton } from './type.t';
 const LoadBuatton: React.FC<ILoadButton> = props => {
   const {
     onClick,
-    loadingText,
-    successText,
+    loadingText = '提交中',
+    successText = '提交成功',
     loading,
     showMsg,
     title,
     showModal,
     timer,
-  } = props;
+  }: ILoadButton = props;
 
   const [laloading, setLaloading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const [count, setCount] = useState(undefined);
   const handleClick = () => {
-    debugger;
     let hide: any = null;
     if (!timer) {
-      if (showModal) {
-        setVisible(true);
-      } else {
-        if (typeof loading === 'undefined' || loading === true)
-          setLaloading(true);
+      if (typeof loading === 'undefined' || loading === true)
+        setLaloading(true);
 
-        if (typeof showMsg === 'undefined' || showMsg === true)
-          hide = message.loading(loadingText, 0);
-      }
+      if (typeof showMsg === 'undefined' || showMsg === true)
+        hide = message.loading(loadingText, 0);
     } else {
       setLaloading(true);
     }
 
-    onClick((success: any) => {
+    onClick((success: boolean) => {
       if (timer) {
         timerHandle();
         setLaloading(false);
@@ -94,9 +89,6 @@ const LoadBuatton: React.FC<ILoadButton> = props => {
       } else {
         setTimeout(hide, 0);
       }
-      if (showModal && success) {
-        setVisible(false);
-      }
     });
   };
 
@@ -106,25 +98,6 @@ const LoadBuatton: React.FC<ILoadButton> = props => {
 
   const handleOk = () => {
     props.handleOk();
-  };
-
-  const renderModal = () => {
-    return (
-      <Modal
-        visible={visible}
-        title={title}
-        onCancel={() => handleCancel()}
-        onOk={() => handleOk()}
-        okButtonProps={{ disabled: !disabled }}
-      >
-        <Checkbox
-          defaultChecked={disabled}
-          onChange={e => setDisabled(e.target.checked)}
-        >
-          勾选后确定删除
-        </Checkbox>
-      </Modal>
-    );
   };
 
   // 如果为发送短信按钮
@@ -157,7 +130,6 @@ const LoadBuatton: React.FC<ILoadButton> = props => {
           <span>{laloading ? '提交中...' : props.children}</span>
         )}
       </Button>
-      {renderModal()}
     </React.Fragment>
   );
 };

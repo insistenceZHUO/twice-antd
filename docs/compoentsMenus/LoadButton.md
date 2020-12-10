@@ -95,11 +95,10 @@ export default () => {
 
 ### 参数
 
-| 参数        | 说明                               | 类型     | 默认值    |
-| ----------- | ---------------------------------- | -------- | --------- |
-| loadingText | 提交中的 loading message 提示文字. | String   | 修改中... |
-| successText | 提交成功后的 message 提示文字      | String   | 提交成功  |
-| showMsg     | 点击时，是否展示弹出层;            | Boolean  | false     |
-| onClick     | 点击事件的回掉函数                 | Function | - -       |
-| title       | 弹出层标题默认显示的文字           | Boolean  | false     |
-| showModal   | 弹出层标题默认显示的文字           | Boolean  | false     |
+| 参数        | 说明                               | 类型           | 默认值    |
+| ----------- | ---------------------------------- | -------------- | --------- |
+| loadingText | 提交中的 loading message 提示文字. | String         | 提交中... |
+| successText | 提交成功后的 message 提示文字      | String         | 提交成功  |
+| showMsg     | 点击时，是否展示弹出层;            | Boolean        | false     |
+| onClick     | 点击事件的回掉函数                 | (done) => void | - -       |
+| title       | 弹出层标题默认显示的文字           | Boolean        | false     |
